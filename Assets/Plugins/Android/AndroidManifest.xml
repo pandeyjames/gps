@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unity3d.player"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:installLocation="preferExternal">
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
+	<!-- Needed only if your app makes the device discoverable to Bluetooth devices. -->
+	<uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+	<uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+	
+
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+	
+	
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- Add the following line to request the RECEIVE_BOOT_COMPLETED permission -->
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	
+
+	<uses-feature android:name="android.hardware.bluetooth" android:required="true"/>
+	<uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+	<!-- The following line is for companion app setup -->
+	<uses-feature android:name="android.software.companion_device_setup"/>
+	
+	<supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true"/>
+
+    <application
+        android:theme="@style/UnityThemeSelector"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name">
+		<!-- Add the following lines to register the BootCompletedReceiver -->
+		<receiver
+            android:name=".BootCompletedReceiver"
+            android:enabled="true"
+            android:exported="true">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED" />
+			</intent-filter>
+		</receiver>
+		
+        <activity android:name="com.unity3d.player.UnityPlayerActivity"
+                  android:label="@string/app_name" android:launchMode="singleTask">
+            <intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+				<category android:name="android.intent.category.HOME" />
+				<category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+        </activity>
+    </application>
+</manifest>
